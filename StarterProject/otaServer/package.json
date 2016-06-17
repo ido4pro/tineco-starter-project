@@ -1,0 +1,16 @@
+{
+  "name": "otaServer",
+  "version": "1.0.0",
+  "main": "otaServer.js",
+  "scripts": {
+    "start": "node otaServer.js"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "request": "^2.62.0"
+  },
+  "optionalDependencies": {},
+  "devDependencies": {},
+  "repository": {},
+  "description": "ota Server for ESP8266"
+}
