@@ -16,11 +16,7 @@ typedef struct {
 	sint16 _tempDs1820;
 	bool _successDs1820;
 
-	sint16 _humiAm2320;
-	sint16 _tempAm2320;
-	bool _successAm2320;
-
-} s_TempRead;
+} s_TempRead1820;
 
 class cDs1820
 {
@@ -32,12 +28,10 @@ public:
 
 	cDs1820(uint8 num);
 	
-	s_TempRead _tempRead;
+	s_TempRead1820 _tempRead;
 	
 	DS18S20 ReadTemp;
 	Timer 	ds1820_timer;
-
-	void _tick_ds1820();
 
 	void _readDs1820();
 	

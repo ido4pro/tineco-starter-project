@@ -21,9 +21,9 @@ void irom _cWdgHw::_init()
 
 void irom _cWdgHw::_tick_wdgHw()
 {
-	_gpio12._outputSet(_OFF);
+	_gpioWdg._outputSet(_OFF);
 	os_delay_us(6000);
-	_gpio12._outputSet(_ON);
+	_gpioWdg._outputSet(_ON);
 
 	_increaseWdgCounter();
 }

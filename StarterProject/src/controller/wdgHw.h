@@ -1,6 +1,8 @@
 #ifndef WDGHW_H_
 #define WDGHW_H_
 
+#define _gpioWdg _gpio16
+
 // watchdog hardware management
 #define NBR_TIMER_MAX				20
 
@@ -14,6 +16,7 @@
 #define ID_SENDDATA_TIMER			3
 #define ID_ADC_TIMER				4
 #define ID_RELAY_TIMER				5
+#define ID_AM2320_TIMER				6
 
 
 #include "type.h"

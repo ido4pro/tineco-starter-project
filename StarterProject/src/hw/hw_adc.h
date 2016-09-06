@@ -19,12 +19,22 @@
 #include "type.h"
 
 
+typedef struct {
+
+	bool _statEtalon;
+	int32 _refEtalon;
+
+} s_etalonADC;
 
 typedef struct {
 	// for read current Level
-
+	int32 _currentLevel;
+	int32 _wattPerHour;
 
 } s_adcRead;
+
+extern s_etalonADC		_etalonADC;
+extern s_adcRead		_adcRead;
 
 class _cAdc
 {
@@ -34,14 +44,13 @@ private:
 
 	int8  	_statAdc;
 	int8  	_numberAdc;
+	int32 	_currentLevel;
 
 	int32 	_readCurrent[ADC_NUMBER_READ];
 
 	int32 	_readCurrentLevel();
 
 	int32 	_readADC();
-
-	void	_resetPeak();
 	
 	Timer   adc_timer;
 	
@@ -50,10 +59,6 @@ private:
 public:
 
 	_cAdc(uint8 num);
-	
-	int32 _currentLevel;
-	int32 _wattPerHour;
-	
 	
 	void 	_start();
 	void 	_stop();

@@ -1,6 +1,9 @@
 #ifndef RELAY_INCLUDE__RELAY_H_
 #define RELAY_INCLUDE__RELAY_H_
 
+#define _gpioRelay _gpio13
+#define _gpioDtcNull _gpio4
+
 #define DELAY_RELAY_TIMER			100 	// milliseconds
 
 #include <SmingCore/SmingCore.h>
@@ -28,7 +31,7 @@ public:
 	void _Off();
 	void _Switch();
 	
-	bool _status();
+	_GPIO_OutputStat _status();
 
 	void _changeStat();
 };

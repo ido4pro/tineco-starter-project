@@ -5,6 +5,8 @@
 #include "hw_gpio.h"
 #include "wdgHw.h"
 
+s_etalonADC		_etalonADC;
+s_adcRead		_adcRead;
 
 irom _cAdc::_cAdc(uint8 num)
 {
@@ -13,6 +15,9 @@ irom _cAdc::_cAdc(uint8 num)
 	_statAdc = 0;
 	_numberAdc = 0;
 	_currentLevel = 0;
+
+	_etalonADC._statEtalon = false;
+	_etalonADC._refEtalon = 0;
 }
 
 void irom _cAdc::_tick_adc()
@@ -23,7 +28,6 @@ void irom _cAdc::_tick_adc()
 	int32 _calc = 0;
 
 	_readCurrent[_numberAdc] = _readCurrentLevel();
-	_resetPeak();
 
 	//m_printf(": %d\n\r",_readCurrent[_numberAdc]);
 
@@ -38,11 +42,29 @@ void irom _cAdc::_tick_adc()
 			_currentLevel += _readCurrent[i];
 		}
 
-		_currentLevel = _currentLevel / ADC_NUMBER_READ;
 		if(_currentLevel > 0)
-			_wattPerHour = _currentLevel * 220 * 1000 / 1414;
+			_currentLevel = (_currentLevel / ADC_NUMBER_READ);
 		else
-			_wattPerHour = 0;
+			_currentLevel = 0;
+
+		if(_etalonADC._statEtalon == false)
+		{
+			_etalonADC._refEtalon = _currentLevel;
+			_etalonADC._statEtalon = true;
+		}
+		else
+		{
+			if(_currentLevel > _etalonADC._refEtalon)
+				_adcRead._currentLevel = (_currentLevel - _etalonADC._refEtalon);
+			else
+				_adcRead._currentLevel = 0;
+
+
+			if(_adcRead._currentLevel > 0)
+				_adcRead._wattPerHour = _adcRead._currentLevel * 220 * 1000 / 1414;
+			else
+				_adcRead._wattPerHour = 0;
+		}
 
 		_statAdc = 0;
 		_numberAdc = 0;
@@ -71,8 +93,6 @@ int32 irom _cAdc::_readCurrentLevel()
 {
 	int32 value = 0;
 
-    _gpio4._outputSet(_OFF);
-	os_delay_us(100);
 	value = _readADC();
 
 	value *= RATIO_DP_CURRENT;
@@ -87,20 +107,11 @@ int32 irom _cAdc::_readCurrentLevel()
 		return 0;
 }
 
-void irom _cAdc::_resetPeak()
-{
-    _gpio14._outputSet(_ON);
-	os_delay_us(DISCHARGE_TIME_RSTPEAK);
-    _gpio14._outputSet(_OFF);
-}
-
 int32 irom _cAdc::_readADC()
 {
 	int32 value = 0;
 
 	value = system_adc_read();
-
-	//debugf("cr:%d\n\r",value);
 
 	value = (value * ADC_VOLT_MAX * 1000);
 	value = (value / ADC_BIT_MAX);
