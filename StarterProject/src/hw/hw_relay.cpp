@@ -22,28 +22,14 @@ void irom _cRelay::_tick_relay()
 
 void irom _cRelay::_changeStat()
 {
-	_gpio13._conf(_INPUT,_PULL_NONE,_OFF,_INTR_DISABLE);// DTC_NULL (stop)
+	_gpioDtcNull._conf(_INPUT,_PULL_NONE,_OFF,_INTR_DISABLE);// DTC_NULL (stop)
 	_wdgHw._stopWdgCounter(ID_RELAY_TIMER);
 	relay_timer.stop();
 
     if(_stat == _ON)
-		_gpio5._outputSet(_ON);
+    	_gpioRelay._outputSet(_ON);
 	else
-		_gpio5._outputSet(_OFF);
-}
-
-void irom _cRelay::_Switch()
-{
-	if(_stat == _OFF)
-	{
-		_On();
-	}
-	else
-	{
-		_Off();
-	}
-	
-	
+		_gpioRelay._outputSet(_OFF);
 }
 
 void irom _cRelay::_On()
@@ -55,7 +41,7 @@ void irom _cRelay::_On()
 
 		_stat = _ON;
 
-		_gpio13._conf(_INTERRUPT,_PULL_NONE,_OFF,_INTR_ANYEDGE);// DTC_MOVE (start)
+		_gpioDtcNull._conf(_INTERRUPT,_PULL_NONE,_OFF,_INTR_ANYEDGE);// DTC_MOVE (start)
 	}
 }
 
@@ -68,13 +54,13 @@ void irom _cRelay::_Off()
 
 		_stat = _OFF;
 
-		_gpio13._conf(_INTERRUPT,_PULL_NONE,_OFF,_INTR_ANYEDGE);// DTC_MOVE (start)
+		_gpioDtcNull._conf(_INTERRUPT,_PULL_NONE,_OFF,_INTR_ANYEDGE);// DTC_MOVE (start)
 	}
 }
 
-bool irom _cRelay::_status()
+_GPIO_OutputStat irom _cRelay::_statu()
 {
-	return (bool) _gpio5._outputGet();
+	return _gpioRelay._outputGet();
 }
 
 

@@ -8,8 +8,8 @@
 
 #define START_URL SERVER_URL "/start"
 
-#define WIFI_SSID "IDO4PRO-3G" // Put you SSID and Password here
-#define WIFI_PWD "Ido4ProWifi"
+#define WIFI_SSID "Livebox-9934" // Put you SSID and Password here
+#define WIFI_PWD "ker_ischia"
 
 #define IS_FIX_IP	0
 //#define ADDR_IP_ESP	"192.168.1.122"

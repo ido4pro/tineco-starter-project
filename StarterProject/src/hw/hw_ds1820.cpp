@@ -13,10 +13,6 @@ void irom cDs1820::init()
 {
 	_tempRead._successDs1820 = false;
 	_tempRead._tempDs1820 = 0;
-
-	_tempRead._successAm2320 = false;
-	_tempRead._tempAm2320 = 0;
-	_tempRead._humiAm2320 = 0;
 }
 
 void irom cDs1820::_readDs1820()
@@ -35,25 +31,25 @@ void irom cDs1820::_readDs1820()
 				if (ReadTemp.IsValidTemperature(a))   // temperature read correctly ?
 				{
 					int32 _temp = 0;
-					_temp = ReadTemp.GetSensorID(a);
+					_temp = ReadTemp.GetRaw(a);
 					_temp *= 100;
 					_temp /= 16;
 
 					_tempRead._tempDs1820 = _temp;
-					debugf(" T%d = %d,%d Celsius\n\r",a+1,_tempRead._tempDs1820/100,_tempRead._tempDs1820%100);
+					m_printf(" T%d = %d,%d Celsius\n\r",a+1,_tempRead._tempDs1820/100,_tempRead._tempDs1820%100);
 
 					//Logger.info(" T%d = %d,%d Celsius\n\r",a+1,_ds1820Read._temperature/100,_ds1820Read._temperature%100);
 
 					_tempRead._successDs1820 = true;
 				}
 				else
-					debugf("Temperature not valid");
+					m_printf("Temperature not valid");
 			}
 		}
 		ReadTemp.StartMeasure();  // next measure, result after 1.2 seconds * number of sensors
 	}
 	else
-		debugf("No valid Measure so far! wait please");
+		m_printf("No valid Measure so far! wait please");
 }
 
 void irom cDs1820::stop()
@@ -68,7 +64,7 @@ void irom cDs1820::stop()
 
 void irom cDs1820::start()
 {
-	ReadTemp.Init(2);  			// select PIN It's required for one-wire initialization!
+	ReadTemp.Init(12);  			// select PIN It's required for one-wire initialization!
 	ReadTemp.StartMeasure(); // first measure start,result after 1.2 seconds * number of sensors
 
 	ds1820_timer.initializeMs(DELAY_DS1820_TIMER, TimerDelegate(&cDs1820::_readDs1820, this)).start();   // every 20 seconds
