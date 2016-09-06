@@ -31,7 +31,8 @@ void irom cDs1820::_readDs1820()
 				if (ReadTemp.IsValidTemperature(a))   // temperature read correctly ?
 				{
 					int32 _temp = 0;
-					_temp = ReadTemp.GetRaw(a);
+					//_temp = ReadTemp.GetRaw(a);
+					_temp = ReadTemp.GetSensorID(a);
 					_temp *= 100;
 					_temp /= 16;
 
