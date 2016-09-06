@@ -2,7 +2,8 @@
 
 #include "webserver.h"
 
-#include "hw_relay.h"
+#include "relayRoute.h"
+
 
 HttpServer server;
 
@@ -20,18 +21,6 @@ void onAjaxFrequency(HttpRequest &request, HttpResponse &response) {
 	response.sendJsonObject(stream);
 }
 
-void onChangeStateRelay(HttpRequest &request, HttpResponse &response) {
-	
-	JsonObjectStream* stream = new JsonObjectStream();
-	JsonObject& json = stream->getRoot();
-	json["status"] = (bool) true;
-	json["date"]= SystemClock.getSystemTimeString(eTZ_UTC);
-	
-	_relay._Switch();
-
-	response.sendJsonObject(stream);
-}
-
 void onIndex(HttpRequest &request, HttpResponse &response) {
 
 	debugf("Default Web Handler");
@@ -42,6 +31,7 @@ void startWebServer() {
 	server.listen(80);
 
 	server.addPath("/api/frequency", onAjaxFrequency);
+	
 	server.addPath("/api/changeStateRelay", onChangeStateRelay);
 	
 	server.setDefaultHandler(onIndex);

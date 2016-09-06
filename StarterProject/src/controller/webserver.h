@@ -5,4 +5,6 @@
 
 void startWebServer();
 
+extern HttpServer server;
+
 #endif /* INCLUDE_WEBSERVER_H_ */
