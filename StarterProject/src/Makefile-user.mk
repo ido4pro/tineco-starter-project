@@ -18,7 +18,7 @@ ESP_HOME = /opt/esp-open-sdk
 # SMING_HOME = c:/tools/sming/Sming 
 
 # MacOS / Linux
-#SMING_HOME = Sming
+#SMING_HOME = /home/tcousin/tineco/tineco-starter-projet/Sming/Sming
 # SMING_HOME = /opt/_Sming_tcn/Sming
 
 ## COM port parameter is reqruied to flash firmware correctly.

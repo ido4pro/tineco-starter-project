@@ -26,17 +26,17 @@ HttpClient httpClient;
 
 void irom _httpRequestResponse(HttpClient& client, bool successful)
 {
-	// if (!successful)
-	// {
-	// 	os_printf("start request fail!\n");
-	// 	mainP._httpReqRes = 1;
-	// 	return;
-	// }
-	// else
+	if (!successful)
 	{
-		// String response = client.getResponseString();
+	 	os_printf("start request fail!\n");
+	 	mainP._httpReqRes = 1;
+	 	return;
+	}
+	else
+	{
+		String response = client.getResponseString();
 		
-		String response = DEVICE_ID;
+		//String response = DEVICE_ID;
 
 		os_printf("start request done : %s\n", response.c_str());
 

@@ -12,7 +12,7 @@ void onChangeStateRelay(HttpRequest &request, HttpResponse &response) {
 	json["status"] = (bool) true;
 	json["date"]= SystemClock.getSystemTimeString(eTZ_UTC);
 	
-	_relay._Switch();
+	//_relay._Switch();
 
 	response.sendJsonObject(stream);
 }

@@ -41,7 +41,6 @@ void irom _cRelay::_Switch()
 	else{
 		_Off();
 	}
-	
 }
 
 void irom _cRelay::_On()
