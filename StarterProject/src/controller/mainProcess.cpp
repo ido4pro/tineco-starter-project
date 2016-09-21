@@ -1,4 +1,5 @@
 #include "mainProcess.h"
+#include "version.h"
 
 #include <SmingCore/SmingCore.h>
 
@@ -68,6 +69,9 @@ void irom cMainP::_sendHttpRequest()
 	root["id1"] = system_get_chip_id();
 	root["id2"] = spi_flash_get_id();
 	root["mac"] = buf2;
+	
+	root["version"] = VERSION;
+	root["slot"]= rboot_get_current_rom();
 
 	//Logger.info("%s", root.toJsonString().c_str());
 	//os_printf("%s", root.toJsonString().c_str());

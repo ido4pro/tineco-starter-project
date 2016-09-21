@@ -37,6 +37,8 @@ form.append('rom', fs.createReadStream('./out/firmware/rom0.bin'));
 console.log('serverUrl=',serverUrl);
 
 form.submit(serverUrl +'/ota/'+deviceid, function(err, res) {
+    
+    console.log('upload done!')
    res.resume();
 
     var mqtt = require('mqtt')

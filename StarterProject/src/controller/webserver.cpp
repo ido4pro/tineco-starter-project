@@ -36,7 +36,7 @@ void startWebServer() {
 	
 	server.setDefaultHandler(onIndex);
 
-	debugf("\r\n=== WEB SERVER STARTED ===\r\n");
+	debugf("\r\n== WEB SERVER STARTED ==\r\n");
 	//Serial.println(WifiStation.getIP());
 	//Serial.println("==============================\r\n");
 }

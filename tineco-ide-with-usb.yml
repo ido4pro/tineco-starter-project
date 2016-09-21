@@ -1,0 +1,19 @@
+tineco-ide:
+
+ container_name: tineco-ide
+ image: ido4pro/esp8266-c9-ide-with-toolchain-docker
+  
+ volumes:
+   - ./StarterProject:/opt/workspace
+   - ./Sming:/opt/sming
+ 
+ environment:
+   - SMING_HOME=/opt/sming/Sming
+   
+ ports:
+ - "10080:80"
+ - "3003:3003"
+ 
+ devices:
+ - "/dev/ttyUSB0:/dev/ttyUSB0"
+ privileged: true

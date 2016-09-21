@@ -4,8 +4,8 @@ tineco-ide:
  image: ido4pro/esp8266-c9-ide-with-toolchain-docker
   
  volumes:
-   - /YOUR_PROJECT_FOLDER:/opt/workspace
-   - /YOUR_PROJECT_FOLDER/Sming:/opt/sming
+   - ./StarterProject:/opt/workspace
+   - ./Sming:/opt/sming
  
  environment:
    - SMING_HOME=/opt/sming/Sming
@@ -15,6 +15,4 @@ tineco-ide:
  
  # devices:
  #- "/dev/ttyUSB0:/dev/ttyUSB0"
-
- 
-privileged: true
+ # privileged: true
