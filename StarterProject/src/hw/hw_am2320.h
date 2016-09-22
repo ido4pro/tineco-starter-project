@@ -2,8 +2,7 @@
 #define _AM2320_H
 
 #include "type.h"
-
-#define _gpioAm2320 _gpio14
+#include "hw_gpio.h"
 
 #define DELAY_AM2320_TIMER			20000 	// milliseconds
 

@@ -9,12 +9,6 @@
 
 typedef Delegate<void()> OtaDelegate;
 
-/*
- #define ROM_0_URL  "http://192.168.0.22:2003/ota/" DEVICE_ID "/rom0.bin"
- #define ROM_1_URL  "http://192.168.0.22:2003/ota/" DEVICE_ID "/rom1.bin"
- #define SPIFFS_URL "http://192.168.0.22:2003/ota/" DEVICE_ID "/spiff_rom.bin"
- */
-
 #define ROM_0_URL  SERVER_URL "/ota/" DEVICE_ID "/rom0.bin"
 #define ROM_1_URL  SERVER_URL "/ota/" DEVICE_ID "/rom1.bin"
 #define SPIFFS_URL SERVER_URL "/ota/" DEVICE_ID "/spiff_rom.bin"

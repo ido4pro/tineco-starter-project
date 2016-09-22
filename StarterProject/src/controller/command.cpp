@@ -5,11 +5,12 @@
 
 #include "logger.h"
 #include "hw_relay.h"
+#include "hw_am2320.h"
 
 #include "ota.h"
 #include "smartwifi.h"
 
-#include "mainProcess.h"
+#include "networkTask.h"
 
 
 void ShowInfo()
@@ -40,7 +41,7 @@ void ParseCommand(char* str)
 	else
 	if (!strcmp(str, "ota"))
 	{
-		OtaUpdate(OtaDelegate(&cMainP::_stop,&mainP),OtaDelegate(&cMainP::_start,&mainP));
+		OtaUpdate(OtaDelegate(&NetworkTask::stop,&networkTask),OtaDelegate(&NetworkTask::start,&networkTask));
 	}
 	else
 	if (!strcmp(str, "switch"))
@@ -87,6 +88,12 @@ void ParseCommand(char* str)
 	{
 		_relay._Off();
 		Logger.info("_relay._Off");
+	}
+	else
+	if (!strcmp(str, "sensor"))
+	{
+		Logger.info("sensor");
+		_am2320._readAm2320();
 	}
 	else
 	if (!strcmp(str, "calendar_dis"))
@@ -145,6 +152,7 @@ void ParseCommand(char* str)
 		Logger.info("  mode_auto - use the calendar for the radiator");
 		Logger.info("  mode_manual - not use the calendar for the radiator");
 		Logger.info("  calendar_dis - display calendar parameter");
+		Logger.info("  sensor - read sensor");
 
 		//Logger.info("");
 	}

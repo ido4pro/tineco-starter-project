@@ -6,6 +6,7 @@ rBootHttpUpdate* otaUpdater = 0;
 OtaDelegate stopBeforeOta;
 OtaDelegate restartAfterOta;
 
+
 void OtaUpdate_CallBack(bool result) {
 
 	if (result == true) {
@@ -97,3 +98,4 @@ void Switch() {
 
 	System.restart();
 }
+

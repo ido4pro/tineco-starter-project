@@ -39,7 +39,7 @@ void irom _cWdgHw::_increaseWdgCounter()
 
 		switch(i)
 		{
-		case ID_MAINPROCESS_TIMER:	timeOut = 8;		break;
+		case ID_NET_TIMER:	timeOut = 8;		break;
 		case ID_DS1820_TIMER:		timeOut = 80;		break;
 		case ID_ADC_TIMER:			timeOut = 4;		break;
 		case ID_SENDDATA_TIMER:		timeOut = 4;		break;
@@ -70,7 +70,7 @@ void irom _cWdgHw::_stopWdgCounter(uint8 id)
 	_wdgTimer[id]._cntWdg = WD_STOP;
 }
 
-void irom _cWdgHw::_start()
+void irom _cWdgHw::start()
 {
 	_tick_wdgHw();
 	wdgHw_timer.initializeMs(DELAY_WDG_TIMER, TimerDelegate(&_cWdgHw::_tick_wdgHw, this)).start();

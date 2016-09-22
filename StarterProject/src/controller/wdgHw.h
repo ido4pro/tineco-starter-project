@@ -10,7 +10,7 @@
 
 #define WD_STOP						-1
 
-#define ID_MAINPROCESS_TIMER		0
+#define ID_NET_TIMER		0
 #define ID_TELEINFO_TIMER			1
 #define ID_DS1820_TIMER				2
 #define ID_SENDDATA_TIMER			3
@@ -54,7 +54,7 @@ public:
 	
 	void _init();
 
-	void _start();
+	void start();
 	void _stop();
 };
 

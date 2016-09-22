@@ -10,11 +10,10 @@
 
 #define START_URL SERVER_URL "/start"
 
-// #define WIFI_SSID "Livebox-9934" // Put you SSID and Password here
-// #define WIFI_PWD "ker_ischia"
+#define WIFI_SSID "****" // Put you SSID and Password here
+#define WIFI_PWD "****"
 
-#define WIFI_SSID "freebox_SGY" // Put you SSID and Password here
-#define WIFI_PWD "***"
+
 
 #define IS_FIX_IP	0
 //#define ADDR_IP_ESP	"192.168.1.122"

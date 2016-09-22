@@ -60,20 +60,17 @@ String LoggerClass::getName()
 
 void LoggerClass::debug(log_type level, const char *fmt, va_list args)
 {
-	if(_allConnected() == false)
-	{
-		debugf("no send logger mqtt disconnect\n\r");
-		return;
-	}
 
 	int size = strlen(fmt);
+	char topic[30];
+	char buf[256];
 
 	if (size < 128)
 	{
-		char topic[30];
+		
 		sprintf(topic, "%s/log", Logger.loggerName.c_str());
 		
-		char buf[256];
+	
 
 		char* p = buf;
 
@@ -85,11 +82,15 @@ void LoggerClass::debug(log_type level, const char *fmt, va_list args)
 		int currentLen = strlen(buf);
 
 		m_vsnprintf(buf + currentLen, sizeof(buf) - currentLen, fmt, args);
-
-		strcat(buf + strlen(buf), "\"}");
 		
-		this->emit(topic,buf);
+		debugf("%s",buf + currentLen);
 
+	}
+	
+	if(_allConnected() == true)
+	{
+		strcat(buf + strlen(buf), "\"}");
+		this->emit(topic,buf);
 	}
 
 }

@@ -1,8 +1,9 @@
 #ifndef RELAY_INCLUDE__RELAY_H_
 #define RELAY_INCLUDE__RELAY_H_
 
-#define _gpioRelay _gpio13
-#define _gpioDtcNull _gpio4
+// #define _gpioRelay _gpio13
+// #define _gpioDtcNull _gpio4
+#include "hw_gpio.h"
 
 #define DELAY_RELAY_TIMER			100 	// milliseconds
 

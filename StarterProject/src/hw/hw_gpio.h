@@ -2,6 +2,13 @@
 #ifndef GPIO_INCLUDE__GPIO_H_
 #define GPIO_INCLUDE__GPIO_H_
 
+#define _gpioDtcNull	_gpio4
+#define PIN_DS_1820 	12
+#define _gpioRelay		_gpio13
+#define _gpioAm2320 	_gpio14
+#define _gpioWdg		_gpio16
+
+
 #define NBRE_GPIO 17
 
 //#define PERIPHS_IO_MUX			    	0x60000800

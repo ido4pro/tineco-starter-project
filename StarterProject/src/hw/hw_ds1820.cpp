@@ -1,4 +1,5 @@
 #include "hw_ds1820.h"
+#include "hw_gpio.h"
 #include "wdgHw.h"
 
 irom cDs1820::cDs1820(uint8 num)
@@ -65,7 +66,7 @@ void irom cDs1820::stop()
 
 void irom cDs1820::start()
 {
-	ReadTemp.Init(12);  			// select PIN It's required for one-wire initialization!
+	ReadTemp.Init(PIN_DS_1820);  			// select PIN It's required for one-wire initialization!
 	ReadTemp.StartMeasure(); // first measure start,result after 1.2 seconds * number of sensors
 
 	ds1820_timer.initializeMs(DELAY_DS1820_TIMER, TimerDelegate(&cDs1820::_readDs1820, this)).start();   // every 20 seconds

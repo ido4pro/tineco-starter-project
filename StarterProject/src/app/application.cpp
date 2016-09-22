@@ -4,6 +4,9 @@
 #include "define.h"
 #include "hw_gpio.h"
 #include "hw_uart.h"
+
+#include "hw_adc.h"
+
 #include "hw_ds1820.h"
 #include "hw_am2320.h"
 
@@ -11,7 +14,7 @@
 
 #include "wdgHw.h"
 
-#include "mainProcess.h"
+#include "networkTask.h"
 
 static void gpio_intr_handler()
 {
@@ -90,7 +93,7 @@ _gpioWdg._conf(_OUTPUT,_PULL_NONE,_ON,_INTR_DISABLE);// WDG_H + LED
 
 	Serial.systemDebugOutput(true);
 
-	_wdgHw._start();
+	_wdgHw.start();
 
 	// _fileSys._mountFileSystem();
 
@@ -109,14 +112,24 @@ _gpioWdg._conf(_OUTPUT,_PULL_NONE,_ON,_INTR_DISABLE);// WDG_H + LED
 #endif
 
 	WifiStation.waitConnection(connectCb);
+	
 
-	int slot = rboot_get_current_rom();
 
 	debugf("\n\n\n");
 	debugf("\r\nVersion %s\r\n", VERSION);
+
+	int slot = rboot_get_current_rom();
 	debugf("\r\nCurrently running rom %d.\r\n", slot);
+
+	
 
 	os_printf("restart system %s RADIATOR 0.0.0 %s\n\r",VERSION,WifiStation.getMAC().c_str());
 	
-	mainP._start();
+	//ds1820.start();
+	
+	_am2320._start();
+
+	_adc._start();
+	
+	networkTask.start();
 }
